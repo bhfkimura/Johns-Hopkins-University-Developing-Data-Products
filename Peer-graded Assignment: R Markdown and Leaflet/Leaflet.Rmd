@@ -1,0 +1,44 @@
+---
+title: "Peer-graded Assignment: R Markdown and Leaflet"
+output: html_document
+date: '`r Sys.Date()`'
+---
+
+<style>
+.html-widget {
+    margin: auto;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, fig.align = "center"}
+library(leaflet)
+
+coord <-
+    data.frame(rbind(
+        c(43.076202518187536, 141.34825317337496),
+        c(43.069215643946826, 141.34953580242228),
+        c(43.08422080496739, 141.32361926775312),
+        c(43.067932950471295, 141.35015695153487),
+        c(43.07094109940386, 141.34844392039997),
+        c(43.08855862397146, 141.33026524271534)
+    ))
+names(coord) <- c("lat", "long")
+
+PopUp <-
+    c("My Top 1 Ramen Restaurant (Matazou)",
+      "My Top 2 Ramen Restaurant (Deno 175)",
+      "My Top 1 Udon Restaurant (Komugi)",
+      "My Top 1 Sushi Restaurant (Hanamaru)",
+      "My Top 1 Soba Restaurant (Kuromugi)",
+      "My Top 2 Soba Restaurant (Namiki)")
+
+df <- data.frame(lat = coord$lat, lng = coord$long)
+
+leaflet(data = df) %>%
+    addTiles() %>%
+    addMarkers(popup = PopUp)
+```
