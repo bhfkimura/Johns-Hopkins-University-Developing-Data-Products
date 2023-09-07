@@ -1,0 +1,43 @@
+---
+title: "Peer-graded Assignment: R Markdown Presentation & Plotly"
+author: "Bruno"
+date: "`r Sys.Date()`"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+## The airquality dataset
+
+The *airquality* dataset contains daily air quality measurements in New York from May to September, 1973. 
+
+We are interested in the relationship of the following variables according to different months:
+
+- **Ozone:** Mean ozone in parts per billion from 13:00 to 15:00 hours at Roosevelt Island,
+
+- **Solar.R:** Solar radiation in Langleys in the frequency band 4000–7700 Angstroms from 08:00 to 12:00 hours at Central Park,
+
+- **Temp:** Maximum daily temperature in degrees Fahrenheit at La Guardia Airport.
+
+## Data preview
+
+```{r, fig.align = 'center'}
+df <- airquality
+df$Month <- factor(month.name[df$Month], levels = c("May", "June", "July", "August", "September"))
+
+head(df, n = 15)
+```
+
+## Output
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(df, x = ~Ozone, y = ~Solar.R, z = ~Temp, color = ~Month) 
+
+fig
+```
+
+
